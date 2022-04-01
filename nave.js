@@ -1,7 +1,7 @@
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
-ctx.width = 200;
-ctx.height=300;
+ctx.width = 3000;
+ctx.height=3000;
 
 var nome=navigator.userAgent; 
 var direita=39;
@@ -14,19 +14,19 @@ if (nome.indexOf('Chrome')!=-1) {
 
 var fundo = new function(){
     this.img = new Image();
-    this.img.src = 'fundo.png';  
+    this.img.src = 'nuvem.png';  
     this.iniframe =0;
     this.w =200;
-    this.h =30;
+    this.h =480;
     this.length=10;
 }
 
 var nave =  new function(){
-    this.x=88;
-    this.y=220;
+    this.x=20;
+    this.y=120;
     this.w=24;
     this.h=24;
-    this.frame=1;
+    this.frame=2;
     this.img = new Image();
     this.img.src = './player.png';  
 }
@@ -39,14 +39,14 @@ function limpa(){
 
 function desenha(){
     desenhaFundo();
-    ctx.drawImage(nave.img,nave.w*nave.frame,0,nave.w, nave.h,nave.x,nave.y,nave.w, nave.h);  
+    ctx.drawImage(nave.img,0,nave.w*nave.frame, nave.h,nave.w,nave.x,nave.y,nave.w, nave.h);  
 }
 
 function desenhaFundo(){
     for (let i = 0; i < fundo.length; i++) {
-       posicaoOrigemY= fundo.h*((fundo.iniframe+i)% fundo.length);
-       y = fundo.h*(fundo.length-i);
-       ctx.drawImage(fundo.img,0,posicaoOrigemY,fundo.w, fundo.h,0,y,fundo.w, fundo.h);  
+        posicaoOrigemX = fundo.w*((fundo.iniframe+i)% fundo.length);
+        x = fundo.w*(fundo.length - i);
+        ctx.drawImage(fundo.img,posicaoOrigemX,0,fundo.w, fundo.h,0,0,fundo.w, fundo.h);
     }
     fundo.iniframe = (fundo.iniframe+1)% fundo.length;
 }
